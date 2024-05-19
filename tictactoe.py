@@ -43,11 +43,13 @@ def main():
 
 
 # Listing the functions we will need to implement:
-def get_board_state():
-  pass
+def get_new_board_state():
+  return [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
 def ask_for_user_input():
-  pass
+  user_input = input("Enter where to place an 'X' in the format 'x, y'")
+  x = int(user_input[0])
+  y = int(user_input[3])
 
 def update_board_state(board_state, move):
   pass

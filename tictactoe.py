@@ -1,3 +1,5 @@
+import random
+
 def main():
 
   # We will need to initialise and store the board state - information about 
@@ -9,7 +11,16 @@ def main():
   game_in_progress = True
 
   while game_in_progress:
-    player_move = ask_for_user_input()
+    
+    need_player_move = True
+    while need_player_move:
+      player_move = ask_for_user_input()
+      x_coord = player_move[0]
+      y_coord = player_move[1]
+      if board_state[x_coord][y_coord] != " ":
+        print("Invalid move, there's already a move made there!")
+      else:
+        need_player_move == False
 
     # We update the board state with the player's move
     board_state = update_board_state(board_state, player_move)
@@ -84,10 +95,25 @@ def check_for_win(board_state):
   return False
 
 def get_computer_move(board_state):
-  pass
+  # we will store the list of possible moves in this variable
+  possible_moves = []
+
+  # We get the list of available moves first
+  for row in [0, 1, 2]:
+    for column in [0, 1, 2]:
+      if board_state[row][column] == " ":
+        possible_moves.append([row, column, "O"])
+  return random.choice(possible_moves)
 
 def print_board(board_state):
-  pass
+  row_number = 0
+  for row in board_state:
+    print("   |   |   ")
+    print(" ", row[0], " | ", row[1], " | ", row[2], sep="")
+    if row_number != 2:
+      print("___|___|___")
+    row_number += 1
+  print("\n")
 
 
 main()

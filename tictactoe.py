@@ -17,10 +17,10 @@ def main():
       player_move = ask_for_user_input()
       x_coord = player_move[0]
       y_coord = player_move[1]
-      if board_state[x_coord][y_coord] != " ":
+      if board_state[y_coord][x_coord] != " ":
         print("Invalid move, there's already a move made there!")
       else:
-        need_player_move == False
+        need_player_move = False
 
     # We update the board state with the player's move
     board_state = update_board_state(board_state, player_move)
@@ -47,7 +47,7 @@ def main():
       if computer_has_won:
         # The computer won. Do same things as when the player won
         game_in_progress = False
-        print("You have won!")
+        print("Computer has won!")
         print_board(board_state)
       else: 
         print_board(board_state)
@@ -69,7 +69,7 @@ def update_board_state(board_state, move):
   x_coordinate = move[0]
   y_coordinate = move[1]
   x_or_o = move[2]
-  board_state[x_coordinate][y_coordinate] = x_or_o
+  board_state[y_coordinate][x_coordinate] = x_or_o
   return board_state
 
 def check_for_win(board_state):
@@ -102,7 +102,9 @@ def get_computer_move(board_state):
   for row in [0, 1, 2]:
     for column in [0, 1, 2]:
       if board_state[row][column] == " ":
-        possible_moves.append([row, column, "O"])
+        possible_moves.append([column, row, "O"])
+  if len(possible_moves)==0:
+    return []
   return random.choice(possible_moves)
 
 def print_board(board_state):

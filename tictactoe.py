@@ -13,8 +13,6 @@ def main():
 
     # We update the board state with the player's move
     board_state = update_board_state(board_state, player_move)
-    print(board_state)
-    break
 
     # We check if the the player has made a winning move
     player_has_won = check_for_win(board_state)
@@ -50,7 +48,7 @@ def get_new_board_state():
 
 
 def ask_for_user_input():
-  user_input = input("Enter where to place an 'X' in the format 'x, y'")
+  user_input = input("Enter where to place an 'X' in the format 'x, y':")
   x = int(user_input[0])
   y = int(user_input[3])
   return [x, y, "X"]
@@ -64,10 +62,32 @@ def update_board_state(board_state, move):
   return board_state
 
 def check_for_win(board_state):
-  pass
+  for checking_for in ["X", "O"]:
+    for row in board_state:
+    # horizontal wins
+      if row[0] == row[1] == row[2] == checking_for:
+        return True
+    for column in [0, 1, 2]:
+    # vertical wins
+      if board_state[0][column] == board_state[1][column] \
+      == board_state[2][column] == checking_for:
+        return True
+   # diagonal wins
+    if board_state[0][0] == board_state[1][1] == \
+    board_state[2][2] == checking_for:
+      return True
+    
+    if board_state[0][2] == board_state[1][1] == \
+    board_state[2][0] == checking_for:
+      return True
+  
+  return False
 
 def get_computer_move(board_state):
   pass
 
 def print_board(board_state):
   pass
+
+
+main()

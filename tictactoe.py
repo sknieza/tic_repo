@@ -13,6 +13,8 @@ def main():
 
     # We update the board state with the player's move
     board_state = update_board_state(board_state, player_move)
+    print(board_state)
+    break
 
     # We check if the the player has made a winning move
     player_has_won = check_for_win(board_state)
@@ -46,13 +48,20 @@ def main():
 def get_new_board_state():
   return [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
+
 def ask_for_user_input():
   user_input = input("Enter where to place an 'X' in the format 'x, y'")
   x = int(user_input[0])
   y = int(user_input[3])
+  return [x, y, "X"]
+
 
 def update_board_state(board_state, move):
-  pass
+  x_coordinate = move[0]
+  y_coordinate = move[1]
+  x_or_o = move[2]
+  board_state[x_coordinate][y_coordinate] = x_or_o
+  return board_state
 
 def check_for_win(board_state):
   pass
